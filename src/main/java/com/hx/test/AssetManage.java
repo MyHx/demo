@@ -1,22 +1,9 @@
 package com.hx.test;
 
-import java.util.Date;
+import lombok.Data;
 
+@Data
 public class AssetManage {
-    private Date creationTime;
+    private String creationTime;
 
-    public Date getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(Date creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    @Override
-    public String toString() {
-        return "AssetManage{" +
-                "creationTime=" + creationTime +
-                '}';
-    }
 }

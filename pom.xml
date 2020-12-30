@@ -60,11 +60,15 @@
             <version>1.2.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
         <dependency>
-            <groupId>com.fenqile.common</groupId>
-            <artifactId>fenqile.util</artifactId>
-            <version>1.2.8-SNAPSHOT</version>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>4.1.21</version>
         </dependency>
     </dependencies>
 
