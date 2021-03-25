@@ -8,7 +8,11 @@ import java.util.Hashtable;
 public class Demo {
 
     public static void main(String[] arg) {
-        System.out.println(1 << 30);
+        Integer a = 1;
+        Integer b = null;
+        if (a.equals(b)) {
+            System.out.println("a");
+        }
     }
 
 }
