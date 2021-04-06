@@ -1,7 +1,10 @@
-package com.hx.test.service;
+package com.hx.test.strategy.service;
 
-import com.hx.test.server.Strategy;
+import com.hx.test.strategy.server.Strategy;
 
+/**
+ * 策略具体减法实现
+ */
 public class StrategySubtraction implements Strategy {
     @Override
     public Integer toHandle(Integer param1, Integer param2) {

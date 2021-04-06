@@ -1,7 +1,7 @@
-package com.hx.test.Bean;
+package com.hx.test.scene.bean;
 
 import cn.hutool.core.map.MapUtil;
-import com.hx.test.server.SceneServer;
+import com.hx.test.scene.server.SceneServer;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+/**
+ * 场景模式
+ */
 @Component
 public class SceneDemoBean implements InitializingBean {
 

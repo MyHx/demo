@@ -1,7 +1,10 @@
-package com.hx.test.service;
+package com.hx.test.strategy.service;
 
-import com.hx.test.server.Strategy;
+import com.hx.test.strategy.server.Strategy;
 
+/**
+ * 策略具体除法实现
+ */
 public class StrategyDivision implements Strategy {
     @Override
     public Integer toHandle(Integer param1, Integer param2) {

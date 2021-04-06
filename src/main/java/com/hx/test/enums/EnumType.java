@@ -6,5 +6,4 @@ public interface EnumType {
 
     String getDesc();
 
-
 }
