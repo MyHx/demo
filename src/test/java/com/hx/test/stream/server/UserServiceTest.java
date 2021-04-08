@@ -96,7 +96,7 @@ public class UserServiceTest {
         cityList.add("北京；上海；深圳；");
         cityList.add("广州；深圳；杭州；");
 
-        //分隔城市列表，使用 flatMap() 将流中的每一个元素连接成为一个流。
+        //分隔城市列表，使用 flatMap() 将流中的每一个元素连接成为一个流。
         cityList = cityList.stream()
                 .map(city -> city.split("；"))
                 .flatMap(Arrays::stream)
