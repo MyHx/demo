@@ -1,13 +1,9 @@
 package com.hx.test;
 
 
-import cn.hutool.core.date.DateUtil;
-import com.hx.test.utils.DateUtils;
+import com.hx.test.async.TestAsyncService;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.sql.SQLOutput;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Date;
 
 public class Demo {
 
@@ -30,20 +26,20 @@ public class Demo {
 //        list.removeAll(list1);  //从list中移除与list1相同的元素
 //        list.forEach(System.out::println);
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, 1970);//控制
-        cal.set(Calendar.MONTH, Calendar.JANUARY);//控制
-        cal.set(Calendar.DAY_OF_MONTH, 1);//控制
-        Date time = cal.getTime();
-        System.out.println(DateUtil.formatDateTime(time));
-        long timea = time.getTime() + 10 * 60 * 1000;
-        System.out.println(DateUtil.formatDateTime(new Date(timea)));
-
-        Timestamp newLeftTime = DateUtils.convertSqlTime(cal.getTime());
-        long addTime = newLeftTime.getTime() + 10 * 60 * 1000;
-        Timestamp newRightTime = DateUtils.convertSqlTime(new Date(addTime));
-        System.out.println(newLeftTime);
-        System.out.println(newRightTime);
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(Calendar.YEAR, 1970);//控制
+//        cal.set(Calendar.MONTH, Calendar.JANUARY);//控制
+//        cal.set(Calendar.DAY_OF_MONTH, 1);//控制
+//        Date time = cal.getTime();
+//        System.out.println(DateUtil.formatDateTime(time));
+//        long timea = time.getTime() + 10 * 60 * 1000;
+//        System.out.println(DateUtil.formatDateTime(new Date(timea)));
+//
+//        Timestamp newLeftTime = DateUtils.convertSqlTime(cal.getTime());
+//        long addTime = newLeftTime.getTime() + 10 * 60 * 1000;
+//        Timestamp newRightTime = DateUtils.convertSqlTime(new Date(addTime));
+//        System.out.println(newLeftTime);
+//        System.out.println(newRightTime);
 
 //        // 获取当前时间:
 //        Calendar c = Calendar.getInstance();
