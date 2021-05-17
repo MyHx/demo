@@ -2,7 +2,11 @@ package com.hx.test;
 
 
 import com.hx.test.async.TestAsyncService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Demo {
@@ -12,6 +16,16 @@ public class Demo {
     }
 
     public static void main(String[] arg) {
+
+        List<String> a = getA();
+        System.out.println(a);
+//        List<String> strings = new ArrayList<>();
+//        strings.add("1");
+//        strings.add("2");
+//        strings.add("3");
+//        strings.add("4");
+//        String a = StringUtils.join(strings, ",");
+//        System.out.println(a);
 
 //        List<Long> list = new ArrayList<>();
 //        list.add(11L);  //向列表中添加数据
@@ -55,6 +69,9 @@ public class Demo {
 
     }
 
+    public static  List<String> getA() {
+        return null;
+    }
 }
 
 
