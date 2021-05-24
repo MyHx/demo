@@ -4,19 +4,20 @@ server:
 spring:
   datasource:
     name: tengyin
-    url: jdbc:mysql://sh-cdb-gn0zelmo.sql.tencentcdb.com:61240/db_caizhi_manage?characterEncoding=UTF-8
-    username: caizhi_dev
-    password: caizhiUser4Dev
+    url: jdbc:mysql://localhost:3306/hexian?serverTimezone=UTC
+    username: root
+    password: 123456
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 
   jpa:
-    hibernate:
-      ddl-auto: create
+    database: mysql
     show-sql: true
     open-in-view: false
+    hibernate:
+      ddl-auto: update
 
 my:
   name: hex
