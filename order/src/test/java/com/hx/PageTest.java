@@ -1,4 +1,4 @@
-package com.hx.utils;
+package com.hx;
 
 
 import org.springframework.util.CollectionUtils;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PageUtils {
+public class PageTest {
 
     public static void main(String[] arg) {
 

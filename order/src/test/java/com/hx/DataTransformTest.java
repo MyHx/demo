@@ -1,4 +1,4 @@
-package com.hx.utils;
+package com.hx;
 
 import com.alibaba.fastjson.JSON;
 import com.hx.entity.SuperEntryMenuDTO;
@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author hexian
  */
-public class DataTransformUtils {
+public class DataTransformTest {
 
     /**
      * 通过Copy方式转换

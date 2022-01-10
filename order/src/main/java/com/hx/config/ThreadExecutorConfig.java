@@ -1,4 +1,4 @@
-package com.hx.config;//package com.hx.test.config;
+package com.hx.config;
 //
 //import lombok.extern.slf4j.Slf4j;
 //import org.springframework.beans.factory.annotation.Value;

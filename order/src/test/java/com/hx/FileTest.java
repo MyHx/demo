@@ -1,9 +1,9 @@
-package com.hx.utils;
+package com.hx;
 
 import java.io.File;
 import java.io.InputStream;
 
-public class TestFileUtil {
+public class FileTest {
 
 
     public static InputStream getResourcesFileInputStream(String fileName) {
@@ -11,7 +11,7 @@ public class TestFileUtil {
     }
 
     public static String getPath() {
-        return TestFileUtil.class.getResource("/").getPath();
+        return FileTest.class.getResource("/").getPath();
     }
 
     public static File createNewFile(String pathName) {
