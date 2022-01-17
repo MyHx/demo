@@ -7,19 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.Map;
 
 /**
  * 场景模式
+ * @author hex
  */
 @Component
-public class SceneDemoBean implements InitializingBean {
+public class SceneDemoBean {
 
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
+    @PostConstruct
+    public void init() {
         Map<String, SceneServer> beansOfType = applicationContext.getBeansOfType(SceneServer.class);
         if (MapUtil.isNotEmpty(beansOfType)) {
             for (Map.Entry<String, SceneServer> stringDemoServerEntry : beansOfType.entrySet()) {
