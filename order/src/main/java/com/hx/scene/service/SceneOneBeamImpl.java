@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * 场景实现类
+ * @author hex
  */
 @Service
 public class SceneOneBeamImpl implements SceneServer {

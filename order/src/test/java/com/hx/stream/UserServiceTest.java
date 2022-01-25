@@ -293,4 +293,10 @@ public class UserServiceTest {
         String join = String.join(",", collect);
         System.out.println(join);
     }
+
+    @Test
+    public void groupingTest() {
+        Map<String, List<User>> collect = userList.stream().collect(Collectors.groupingBy(record -> record.getName() + "_" + record.getSex() + "_" + record.getAge()));
+        collect.forEach((key,value) -> System.out.println(key + "-------" + value));
+    }
 }
