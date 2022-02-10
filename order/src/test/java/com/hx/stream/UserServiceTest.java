@@ -10,6 +10,7 @@ import com.hx.stream.service.UserService;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,6 +36,15 @@ public class UserServiceTest {
     public void forEachTest() {
         //遍历用户列表
         userList.forEach(System.out::println);
+
+        List<String> strList = Arrays.asList("a", "b", "c");
+        strList.forEach(System.out::print);//abc
+        System.out.println();
+        strList.forEach(System.out::print);//abc
+        System.out.println();
+        strList.parallelStream().forEachOrdered(System.out::print);//abc
+        System.out.println();
+        strList.parallelStream().forEach(System.out::print);//bca
     }
 
     /**
@@ -286,6 +296,63 @@ public class UserServiceTest {
 
     }
 
+    /**
+     * 无限流
+     * 可用limit来限制
+     */
+    @Test
+    public void generateTest() {
+        Stream<Integer> stream1 = Stream.generate(() -> new Random().nextInt(10));
+//        Stream<Integer> stream2 = Stream.generate(() -> new Random().nextInt(10)).limit(6);
+        stream1.forEach(System.out::println);
+//        stream2.forEach(System.out::println);
+    }
+
+    /**
+     * 迭代流
+     */
+    @Test
+    public void iterateTest() {
+        //Java 9中对stream.iterate进行了增强。它支持谓词（条件）作为第二个参数，并且如果谓词为false， stream.iterate将停止。
+        // Stream.iterate(1, n -> n < 20 , n -> n * 2).forEach(x -> System.out.println(x));
+        Stream.iterate(0, n -> n + 1).filter(x -> x % 2 != 0).limit(10).forEach(System.out::println);
+    }
+
+    /**
+     * 最大值，最小值
+     */
+    @Test
+    public void maxTest() {
+        User maxUser = userList.stream().max(Comparator.comparing(a -> a.getAge() > 25)).get();
+        User minUser = userList.stream().min(Comparator.comparing(a -> a.getAge() > 25)).get();
+        System.out.println(maxUser);
+        System.out.println(minUser);
+        System.out.println("---------------");
+        // get()可能为空，所以警告
+        Optional<User> maxOptional = userList.stream().max(Comparator.comparing(a -> a.getAge() > 25));
+        maxOptional.ifPresent(System.out::println);
+    }
+
+    /**
+     * 指定顺序流
+     */
+    @Test
+    public void ofTest() {
+        List<String> collect = Stream.of("a", "b", "c").collect(Collectors.toList());
+        System.out.println(collect);
+    }
+
+    /**
+     * peek and forEach
+     * 场景不一样 peek是中间操作 foreach是终结消费操作
+     */
+    @Test
+    public void peekTest() {
+        Stream<String> stream = Stream.of("12", "15");
+        List<String> collect = stream.peek(String::length).collect(Collectors.toList());
+//        collect.forEach(System.out::println);
+    }
+
 
     @Test
     public void joinTest() {
@@ -299,4 +366,31 @@ public class UserServiceTest {
         Map<String, List<User>> collect = userList.stream().collect(Collectors.groupingBy(record -> record.getName() + "_" + record.getSex() + "_" + record.getAge()));
         collect.forEach((key,value) -> System.out.println(key + "-------" + value));
     }
+
+    @Test
+    public void test() {
+//        Map<String, DoubleSummaryStatistics> collect = userList.stream().collect(Collectors.groupingBy(User::getDepartment, Collectors.summarizingDouble(User::getAge)));
+//        collect.forEach((a, b) -> System.out.println(a + b));
+//        Map<String, List<User>> collect = userList.stream().collect(Collectors.groupingBy(User::getDepartment));
+//        Map<String, List<User>> collect1 = userList.parallelStream().unordered().collect(Collectors.groupingByConcurrent(User::getDepartment));
+
+//        List<? extends Number> list = new ArrayList<Integer>();
+//        List<Integer> integers = new ArrayList<>();
+//        integers.add(1);
+//        integers.add(2);
+//        integers.add(4);
+//        list = integers;
+//        System.out.println(list);
+        User user = userList.get(0);
+//        String str = "小红";
+//        String replace = str.replace("小", "红");
+        String unknown = Optional
+                .ofNullable(user)
+                .map(User::getName)
+                .map(r -> r.replace("小", "红"))
+                .orElseThrow(() -> new RuntimeException("参数异常"));
+        System.out.println(unknown);
+    }
+
+
 }
