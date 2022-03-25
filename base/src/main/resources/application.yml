@@ -1,0 +1,28 @@
+server:
+  port: 8083
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  datasource:
+    name: test
+    url: jdbc:mysql://sh-cdb-gn0zelmo.sql.tencentcdb.com:61240/db_caizhi_manage?characterEncoding=utf8&useSSL=false&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Hongkong
+    username: caizhi_dev
+    password: caizhiUser4Dev
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    maxActive: 100
+    initialSize: 10
+    maxWait: 60000
+    minIdle: 10
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+
+mybatis:
+  typeAliasesPackage: com.hx.base.dao.entity
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
