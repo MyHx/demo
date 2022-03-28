@@ -1,12 +1,14 @@
-package com.hx.base.dao.mapper;
+package com.hx.base.service;
 
-import com.hx.base.dao.entity.CorpSalon;
+    import com.hx.base.dao.entity.CorpSalon;
 
 /**
  * @author hexian
- * @date 2022/3/28 14:48
+ * @date 2022/3/28 14:47
  */
-public interface CorpSalonMapper {
+public interface CorpSalonService {
+
+
     int deleteByPrimaryKey(Long id);
 
     int insert(CorpSalon record);
@@ -19,3 +21,5 @@ public interface CorpSalonMapper {
 
     int updateByPrimaryKey(CorpSalon record);
 }
+
+
