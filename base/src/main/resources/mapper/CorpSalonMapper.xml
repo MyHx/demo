@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.base.dao.mapper.CorpSalonMapper">
+  <resultMap id="BaseResultMap" type="com.hx.base.dao.entity.CorpSalon">
+    <!--@mbg.generated-->
+    <!--@Table t_corp_salon-->
+    <id column="fid" jdbcType="BIGINT" property="id" />
+    <result column="fcorp_id" jdbcType="VARCHAR" property="corpId" />
+    <result column="fsalon_id" jdbcType="BIGINT" property="salonId" />
+    <result column="fname" jdbcType="VARCHAR" property="name" />
+    <result column="forganizer" jdbcType="VARCHAR" property="organizer" />
+    <result column="faddress" jdbcType="VARCHAR" property="address" />
+    <result column="fdetailed_address" jdbcType="VARCHAR" property="detailedAddress" />
+    <result column="fis_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="fpublish_time" jdbcType="TIMESTAMP" property="publishTime" />
+    <result column="fcreate_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="fupdate_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="fcreate_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="fupdate_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="fcreate_by_dept" jdbcType="VARCHAR" property="createByDept" />
+    <result column="fcreate_by_dept_id" jdbcType="VARCHAR" property="createByDeptId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    fid, fcorp_id, fsalon_id, fname, forganizer, faddress, fdetailed_address, fis_deleted, 
+    fpublish_time, fcreate_time, fupdate_time, fcreate_by, fupdate_by, fcreate_by_dept, 
+    fcreate_by_dept_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_corp_salon
+    where fid = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from t_corp_salon
+    where fid = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hx.base.dao.entity.CorpSalon">
+    <!--@mbg.generated-->
+    insert into t_corp_salon (fid, fcorp_id, fsalon_id, 
+      fname, forganizer, faddress, 
+      fdetailed_address, fis_deleted, fpublish_time, 
+      fcreate_time, fupdate_time, fcreate_by, 
+      fupdate_by, fcreate_by_dept, fcreate_by_dept_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{corpId,jdbcType=VARCHAR}, #{salonId,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{organizer,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{detailedAddress,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, #{publishTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR}, #{createByDept,jdbcType=VARCHAR}, #{createByDeptId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hx.base.dao.entity.CorpSalon">
+    <!--@mbg.generated-->
+    insert into t_corp_salon
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        fid,
+      </if>
+      <if test="corpId != null">
+        fcorp_id,
+      </if>
+      <if test="salonId != null">
+        fsalon_id,
+      </if>
+      <if test="name != null">
+        fname,
+      </if>
+      <if test="organizer != null">
+        forganizer,
+      </if>
+      <if test="address != null">
+        faddress,
+      </if>
+      <if test="detailedAddress != null">
+        fdetailed_address,
+      </if>
+      <if test="isDeleted != null">
+        fis_deleted,
+      </if>
+      <if test="publishTime != null">
+        fpublish_time,
+      </if>
+      <if test="createTime != null">
+        fcreate_time,
+      </if>
+      <if test="updateTime != null">
+        fupdate_time,
+      </if>
+      <if test="createBy != null">
+        fcreate_by,
+      </if>
+      <if test="updateBy != null">
+        fupdate_by,
+      </if>
+      <if test="createByDept != null">
+        fcreate_by_dept,
+      </if>
+      <if test="createByDeptId != null">
+        fcreate_by_dept_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="corpId != null">
+        #{corpId,jdbcType=VARCHAR},
+      </if>
+      <if test="salonId != null">
+        #{salonId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="organizer != null">
+        #{organizer,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedAddress != null">
+        #{detailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="publishTime != null">
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createByDept != null">
+        #{createByDept,jdbcType=VARCHAR},
+      </if>
+      <if test="createByDeptId != null">
+        #{createByDeptId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hx.base.dao.entity.CorpSalon">
+    <!--@mbg.generated-->
+    update t_corp_salon
+    <set>
+      <if test="corpId != null">
+        fcorp_id = #{corpId,jdbcType=VARCHAR},
+      </if>
+      <if test="salonId != null">
+        fsalon_id = #{salonId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        fname = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="organizer != null">
+        forganizer = #{organizer,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        faddress = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedAddress != null">
+        fdetailed_address = #{detailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        fis_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="publishTime != null">
+        fpublish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        fcreate_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        fupdate_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        fcreate_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        fupdate_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createByDept != null">
+        fcreate_by_dept = #{createByDept,jdbcType=VARCHAR},
+      </if>
+      <if test="createByDeptId != null">
+        fcreate_by_dept_id = #{createByDeptId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fid = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hx.base.dao.entity.CorpSalon">
+    <!--@mbg.generated-->
+    update t_corp_salon
+    set fcorp_id = #{corpId,jdbcType=VARCHAR},
+      fsalon_id = #{salonId,jdbcType=BIGINT},
+      fname = #{name,jdbcType=VARCHAR},
+      forganizer = #{organizer,jdbcType=VARCHAR},
+      faddress = #{address,jdbcType=VARCHAR},
+      fdetailed_address = #{detailedAddress,jdbcType=VARCHAR},
+      fis_deleted = #{isDeleted,jdbcType=TINYINT},
+      fpublish_time = #{publishTime,jdbcType=TIMESTAMP},
+      fcreate_time = #{createTime,jdbcType=TIMESTAMP},
+      fupdate_time = #{updateTime,jdbcType=TIMESTAMP},
+      fcreate_by = #{createBy,jdbcType=VARCHAR},
+      fupdate_by = #{updateBy,jdbcType=VARCHAR},
+      fcreate_by_dept = #{createByDept,jdbcType=VARCHAR},
+      fcreate_by_dept_id = #{createByDeptId,jdbcType=VARCHAR}
+    where fid = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

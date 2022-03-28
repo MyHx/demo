@@ -1,23 +1,30 @@
 package com.hx;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.hx.scene.service.SceneOneBeamImpl;
-import com.hx.stream.bean.User;
-import org.apache.bcel.generic.IF_ACMPEQ;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import javax.annotation.PreDestroy;
-import java.math.BigDecimal;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import org.apache.commons.lang.StringUtils;
 
 
 public class Demo {
     public static void main(String[] args) {
 
-        JSONObject jsonObject = JSON.parseObject("{\"snapshotId\": \"491d8116fabe41d3af7ddc775affd4b7\"}");
+        String strKey = "fab_cc_dd";
+
+//        System.out.println(StringUtils.substring(str, 1, str.length()).replaceAll("_",""));
+        if (strKey.contains("_")) {
+            String[] keyArray = strKey.split("_");
+            StringBuffer sb = new StringBuffer();
+            boolean flag = false;
+            for (String key : keyArray) {
+                if (flag) {
+                    //下划线后的首字母大写
+                    sb.append(StringUtils.capitalize(key));
+                } else {
+                    flag = true;
+                    sb.append(key);
+                }
+            }
+            strKey = sb.toString();
+        }
+        System.out.println(StringUtils.substring(strKey, 1, strKey.length()));
     }
 }
