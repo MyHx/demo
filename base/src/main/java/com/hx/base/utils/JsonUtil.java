@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by Aniskin on 2017/4/28.
+ * @author Administrator
  */
 @Slf4j
 public class JsonUtil {
@@ -82,7 +82,7 @@ public class JsonUtil {
      * List<T> 转 json 保存到数据库
      */
     public static <T> String listToJson(List<T> ts) {
-        if(ts == null){
+        if (ts == null) {
             return null;
         }
         return JSON.toJSONString(ts);

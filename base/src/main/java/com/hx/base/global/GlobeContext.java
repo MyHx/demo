@@ -1,5 +1,8 @@
 package com.hx.base.global;
 
+/**
+ * @author Administrator
+ */
 public class GlobeContext {
 
     private static final ThreadLocal<Context> threadLocal = new ThreadLocal<>();
@@ -38,7 +41,8 @@ public class GlobeContext {
         }
         return ctx.getRequestId();
     }
-//    public static String getSessionKey() {
+
+    //    public static String getSessionKey() {
 //        Context ctx = threadLocal.get();
 //        if (ctx == null) {
 //            return null;
@@ -61,7 +65,8 @@ public class GlobeContext {
         }
         return ctx.getUnionId();
     }
-//
+
+    //
 //    public static String getIP() {
 //        Context ctx = threadLocal.get();
 //        if (ctx == null) {
@@ -139,7 +144,7 @@ public class GlobeContext {
         return ctx.getUserId();
     }
 
-//    public static void setStaffVisitSource(Integer staffVisitSource) {
+    //    public static void setStaffVisitSource(Integer staffVisitSource) {
 //        Context ctx = threadLocal.get();
 //        if (ctx == null) {
 //            ctx = new Context();
@@ -206,7 +211,8 @@ public class GlobeContext {
         ctx.setCorpId(corpId);
         threadLocal.set(ctx);
     }
-//
+
+    //
 //
 //    public static void setIP(String IP) {
 //        Context ctx = threadLocal.get();

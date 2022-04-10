@@ -1,5 +1,11 @@
 package com.hx.base.constant.exception;
 
+/**
+ * 错误码枚举
+ *
+ * @author Administrator
+ */
+
 public enum ErrorCodeEnum {
 
     SUCCESS(0, "success"),

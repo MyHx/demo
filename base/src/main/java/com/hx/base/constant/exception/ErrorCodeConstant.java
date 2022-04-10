@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Author: hbf
- * @CreateTime: 2019-08-13 11:31
- * @Description:
+ * @author Administrator
  */
 public class ErrorCodeConstant {
     public static final Map<Integer, String> codeMap = new HashMap<>();

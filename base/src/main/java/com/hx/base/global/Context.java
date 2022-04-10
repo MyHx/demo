@@ -37,7 +37,7 @@ public class Context {
     /**
      * 微信用户登录  有个最近联系的客户经理id
      */
-    private String  lastTouchStaffId;
+    private String lastTouchStaffId;
 
     private String appId;
 
@@ -47,7 +47,7 @@ public class Context {
 
     private String fromAppId;
 
-    private String  loginFrom;
+    private String loginFrom;
 
     private Integer staffVisitSource;
 
