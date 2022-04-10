@@ -6,12 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * 企业沙龙活动基本信息
  * @author hexian
  * @date 2022/3/28 14:48
- */
-
-/**
- * 企业沙龙活动基本信息
  */
 @Data
 @AllArgsConstructor

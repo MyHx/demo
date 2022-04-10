@@ -26,6 +26,9 @@ import java.util.Map;
 import static com.hx.base.constant.exception.ErrorCodeConstant.*;
 
 
+/**
+ * @author Administrator
+ */
 @Slf4j
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
