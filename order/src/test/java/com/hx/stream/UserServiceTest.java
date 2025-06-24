@@ -3,6 +3,7 @@ package com.hx.stream;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.lang.TypeReference;
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.hx.stream.bean.User;
 import com.hx.stream.bean.UserVO;
@@ -369,27 +370,30 @@ public class UserServiceTest {
 
     @Test
     public void test() {
-//        Map<String, DoubleSummaryStatistics> collect = userList.stream().collect(Collectors.groupingBy(User::getDepartment, Collectors.summarizingDouble(User::getAge)));
-//        collect.forEach((a, b) -> System.out.println(a + b));
-//        Map<String, List<User>> collect = userList.stream().collect(Collectors.groupingBy(User::getDepartment));
-//        Map<String, List<User>> collect1 = userList.parallelStream().unordered().collect(Collectors.groupingByConcurrent(User::getDepartment));
-
-//        List<? extends Number> list = new ArrayList<Integer>();
-//        List<Integer> integers = new ArrayList<>();
-//        integers.add(1);
-//        integers.add(2);
-//        integers.add(4);
-//        list = integers;
-//        System.out.println(list);
-        User user = userList.get(0);
-//        String str = "小红";
-//        String replace = str.replace("小", "红");
-        String unknown = Optional
-                .ofNullable(user)
-                .map(User::getName)
-                .map(r -> r.replace("小", "红"))
-                .orElseThrow(() -> new RuntimeException("参数异常"));
-        System.out.println(unknown);
+        List<User> userList = UserService.getUserList();
+        Map<String, List<Map<String, Object>>> simplifiedMap =
+                Collections.singletonMap("疾病类型",
+                        userList.stream()
+                                .collect(Collectors.groupingBy(
+                                        User::getName,
+                                        Collectors.mapping(info -> {
+                                            Map<String, Object> productMap = new LinkedHashMap<>();
+                                            productMap.put("推荐产品", info.getDepartment());
+                                            productMap.put("推荐理由(产品介绍)", info.getAge());
+                                            productMap.put("成分功效解释", info.getSex());
+                                            return productMap;
+                                        }, Collectors.toList())
+                                ))
+                                .entrySet().stream()
+                                .map(entry -> {
+                                    Map<String, Object> diseaseGroup = new LinkedHashMap<>();
+                                    diseaseGroup.put("疾病名称", entry.getKey());
+                                    diseaseGroup.put("推荐产品列表", entry.getValue());
+                                    return diseaseGroup;
+                                })
+                                .collect(Collectors.toList())
+                );
+        System.out.println(JSONUtil.toJsonStr(simplifiedMap));
     }
 
 
