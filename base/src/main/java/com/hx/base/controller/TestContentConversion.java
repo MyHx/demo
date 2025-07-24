@@ -1,32 +1,38 @@
 package com.hx.base.controller;
 
-import com.hx.base.constant.ConsultantEnum;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.hx.base.dao.entity.Consultant;
 import com.hx.base.dao.entity.Dic;
-import com.hx.base.dao.entity.DicVo;
 import com.hx.base.dao.entity.OrgConfigVO;
 import com.hx.base.dao.entity.PdfSettingVO;
-import com.hx.base.dao.entity.PromptTemplate;
 import com.hx.base.service.ConfigService;
 import com.hx.base.service.ConsultantService;
 import com.hx.base.service.DicService;
 import com.hx.base.service.PdfSettingService;
-import com.hx.base.service.PromptService;
 import com.hx.base.utils.MarkdownToPdfConverter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.List;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -257,10 +263,21 @@ public class TestContentConversion {
         data = healthImage(pdfSetting) + "{HEALTHINFO}<br></br>\n\n" + appendImage(false, pdfSetting) + data;
 
         Consultant consultant = consultantService.getConsultantInfoById(1);
-        Dic dic = dicService.findOneByDicCode("HWXC_PHARMACY");
-        if (null != consultant && null != dic) {
-            data = data + "<br></br>" + consultantQCCodeImage(consultant, dic);
+        Dic pharmacyImage = dicService.findOneByDicCode(orgCode + "_PHARMACY");
+        Dic scanToMini = dicService.findOneByDicCode("SCAN_TO_MINI");
+        if (null != consultant && null != pharmacyImage && null != scanToMini) {
+            Map<String, String> params = new HashMap<>();
+            params.put("orgCode", consultant.getOrgCode());
+            params.put("consultantId", String.valueOf(1));
+            String miniQrCode = generateWebQRCode(
+                    scanToMini.getDicValue(),
+                    params,
+                    253
+            );
+            data = data + "<br></br>" + consultantQCCodeImage(consultant, miniQrCode, pharmacyImage);
         }
+
+
         byte[] content = markdownToPdfConverter.convertMarkdownToPdf(data, replace, pdfSetting.getCss(),
                 pdfSetting.getHeaderHtml(), pdfSetting.getFooterHtml(), pdfSetting.getMarginTop(),
                 pdfSetting.getMarginBottom(), pdfSetting.getMarginLeft(), pdfSetting.getMarginRight());
@@ -270,19 +287,24 @@ public class TestContentConversion {
     }
 
     /**
-     * 追加图片
+     * 获取二维码图片
      *
-     * @param consultant 顾问信息
-     * @param dic
+     * @param consultant    顾问信息
+     * @param miniQrCode    小程序二维码
+     * @param pharmacyImage 药店二维码信息
      * @return
      */
-    private String consultantQCCodeImage(Consultant consultant, Dic dic) {
-        return "<div class=\"qr-code\"><div>"+"<img src=\"" + consultant.getQrCode() +"\">" +
-                "<div>"+ "您的健康顾问-" + consultant.getName() + "</div>" +
+    private String consultantQCCodeImage(Consultant consultant, String miniQrCode, Dic pharmacyImage) {
+        return "<div class=\"qr-code\"><div>" + "<img src=\"" + consultant.getQrCode() + "\">" +
+                "<div>" + "您的健康顾问-" + consultant.getName() + "</div>" +
                 "</div>" +
+//                "<div>" +
+//                "<img src=\"" + miniQrCode + "\">" +
+//                "<div>" + "欢迎使用小程序" + "</div>" +
+//                "</div>" +
                 "<div>" +
-                "<img src=\"" + dic.getDicValue() +"\">" +
-                "<div>"+ dic.getShowName() + "</div>" +
+                "<img src=\"" + pharmacyImage.getDicValue() + "\">" +
+                "<div>" + pharmacyImage.getShowName() + "</div>" +
                 "</div>" +
                 "</div>";
     }
@@ -336,5 +358,58 @@ public class TestContentConversion {
                 "<div style=\"text-align: left;\">\n" +
                         "<img src=\"" + pdfSettingVO.getExplainImage() + "\" />\n" +
                         "</div>\n\n" ;
+    }
+
+    /**
+     * 生成带参数的URL二维码（Base64格式）
+     *
+     * @param baseUrl 基础URL
+     * @param params  URL参数Map
+     * @param size    二维码尺寸（正方形）
+     * @return 可直接用于img标签的base64字符串
+     */
+    public static String generateWebQRCode(String baseUrl, Map<String, String> params, int size) {
+        try {
+            // 1. 构建带参数的URL
+            StringBuilder urlBuilder = new StringBuilder(baseUrl);
+            if (params != null && !params.isEmpty()) {
+                urlBuilder.append("?");
+                for (Map.Entry<String, String> entry : params.entrySet()) {
+                    urlBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8.name()))
+                            .append("=")
+                            .append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8.name()))
+                            .append("&");
+                }
+                urlBuilder.deleteCharAt(urlBuilder.length() - 1);
+            }
+            String targetUrl = urlBuilder.toString();
+
+            // 2. 配置二维码参数
+            Map<EncodeHintType, Object> hints = new HashMap<>();
+            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q); // 25%容错
+            hints.put(EncodeHintType.MARGIN, 0); // 最小边距
+            hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+
+            // 3. 生成二维码矩阵
+            BitMatrix matrix = new MultiFormatWriter().encode(
+                    targetUrl,
+                    BarcodeFormat.QR_CODE,
+                    size,
+                    size,
+                    hints
+            );
+
+            // 4. 转换为Base64
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            MatrixToImageWriter.writeToStream(matrix, "PNG", os);
+            String base64 = Base64.getEncoder().encodeToString(os.toByteArray());
+
+            // 5. 返回Web可直接使用的格式
+            return "data:image/png;base64," + base64;
+
+        } catch (Exception e) {
+            // 实际应用中应使用日志记录
+            throw new RuntimeException("二维码生成失败: " + e.getMessage());
+        }
     }
 }

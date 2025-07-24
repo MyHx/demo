@@ -1,30 +1,31 @@
 package com.hx;
 
 
-import org.apache.commons.lang.StringUtils;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class Demo {
     public static void main(String[] args) {
-
-        String strKey = "fab_cc_dd";
-
-//        System.out.println(StringUtils.substring(str, 1, str.length()).replaceAll("_",""));
-        if (strKey.contains("_")) {
-            String[] keyArray = strKey.split("_");
-            StringBuffer sb = new StringBuffer();
-            boolean flag = false;
-            for (String key : keyArray) {
-                if (flag) {
-                    //下划线后的首字母大写
-                    sb.append(StringUtils.capitalize(key));
-                } else {
-                    flag = true;
-                    sb.append(key);
-                }
-            }
-            strKey = sb.toString();
+        AtomicBoolean connectionClosed = new AtomicBoolean(false);
+        while (!connectionClosed.get()) {
+            send("内容", connectionClosed);
         }
-        System.out.println(StringUtils.substring(strKey, 1, strKey.length()));
+        if (connectionClosed.get()) {
+            System.out.println("连接已关闭");
+            return;
+        }
+        System.out.println("继续逻辑");
+    }
+
+    private static void send(String text, AtomicBoolean connectionClosed) {
+        try {
+            System.out.println(text);
+            throw new RuntimeException();
+        } catch (Exception e) {
+            if (!connectionClosed.getAndSet(true)) {
+                System.out.println("客户端已断开连接");
+            }
+            System.out.println("执行关闭逻辑");
+        }
     }
 }

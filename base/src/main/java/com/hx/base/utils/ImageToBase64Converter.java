@@ -27,8 +27,8 @@ public class ImageToBase64Converter {
 
     public static void main(String[] args) {
         try {
-//            String imagePath = "C:\\Users\\lamroy\\Desktop\\123.jpg"; // 替换为实际图片路径
-            String imagePath = "C:\\Users\\lamroy\\Desktop\\创维智慧\\海王星辰健康药房同富商场一店\\405.png"; // 替换为实际图片路径
+//            String imagePath = "C:\\Users\\lamroy\\Desktop\\创维智慧\\300002海王星辰湖滨花园店\\10.png"; // 替换为实际图片路径
+            String imagePath = "C:\\Users\\lamroy\\Desktop\\logo.png"; // 替换为实际图片路径
             String base64String = convertImageToBase64(imagePath);
             // 如果需要Data URI格式（可直接在HTML中使用）
             String mimeType = Files.probeContentType(Paths.get(imagePath));
