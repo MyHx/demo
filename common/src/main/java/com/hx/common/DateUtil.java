@@ -1,6 +1,9 @@
-package com.hx.utils;
+package com.hx.common;
+
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class DateUtils {
+public class DateUtil {
 
     public static final DateTimeFormatter MONTH_FORMATTER = DateTimeFormatter.ofPattern("yyyyMM");
 
@@ -17,8 +20,6 @@ public class DateUtils {
     public static final String DAY_FORMATTER = "yyyy-MM-dd";
 
     public static final String HYPHEN_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
-    public static final String HYPHEN_TIME_FORMAT = "HH:mm:ss";
 
     public static final String DAY_MIN_TIME = " 00:00:00";
 
@@ -649,10 +650,10 @@ public class DateUtils {
         c.setTime(date);
         c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek());
         Date time = c.getTime();
-        time = org.apache.commons.lang3.time.DateUtils.setHours(time, 0);
-        time = org.apache.commons.lang3.time.DateUtils.setMinutes(time, 0);
-        time = org.apache.commons.lang3.time.DateUtils.setSeconds(time, 0);
-        time = org.apache.commons.lang3.time.DateUtils.setMilliseconds(time, 0);
+        time = DateUtils.setHours(time, 0);
+        time = DateUtils.setMinutes(time, 0);
+        time = DateUtils.setSeconds(time, 0);
+        time = DateUtils.setMilliseconds(time, 0);
         return time;
     }
 
@@ -668,10 +669,10 @@ public class DateUtils {
         c.setTime(date);
         c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek() + 6);
         Date time = c.getTime();
-        time = org.apache.commons.lang3.time.DateUtils.setHours(time, 23);
-        time = org.apache.commons.lang3.time.DateUtils.setMinutes(time, 59);
-        time = org.apache.commons.lang3.time.DateUtils.setSeconds(time, 59);
-        time = org.apache.commons.lang3.time.DateUtils.setMilliseconds(time, 0);
+        time = DateUtils.setHours(time, 23);
+        time = DateUtils.setMinutes(time, 59);
+        time = DateUtils.setSeconds(time, 59);
+        time = DateUtils.setMilliseconds(time, 0);
         return time;
     }
 
@@ -704,8 +705,9 @@ public class DateUtils {
     // 获取某个日期的开始时间
     public static Timestamp getDayStartTime(Date d) {
         Calendar calendar = Calendar.getInstance();
-        if (null != d)
+        if (null != d) {
             calendar.setTime(d);
+        }
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
         calendar.set(Calendar.MILLISECOND, 0);
@@ -715,8 +717,9 @@ public class DateUtils {
     // 获取某个日期的结束时间
     public static Timestamp getDayEndTime(Date d) {
         Calendar calendar = Calendar.getInstance();
-        if (null != d)
+        if (null != d) {
             calendar.setTime(d);
+        }
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH), 23, 59, 59);
         calendar.set(Calendar.MILLISECOND, 999);
@@ -748,10 +751,10 @@ public class DateUtils {
         //设置日历中月份的最小天数
         cal.set(Calendar.DAY_OF_MONTH, firstDay);
         Date time = cal.getTime();
-        time = org.apache.commons.lang3.time.DateUtils.setHours(time, 0);
-        time = org.apache.commons.lang3.time.DateUtils.setMinutes(time, 0);
-        time = org.apache.commons.lang3.time.DateUtils.setSeconds(time, 1);
-        time = org.apache.commons.lang3.time.DateUtils.setMilliseconds(time, 0);
+        time = DateUtils.setHours(time, 0);
+        time = DateUtils.setMinutes(time, 0);
+        time = DateUtils.setSeconds(time, 1);
+        time = DateUtils.setMilliseconds(time, 0);
         return time;
     }
 
@@ -770,10 +773,10 @@ public class DateUtils {
         //设置日历中月份的最大天数
         cal.set(Calendar.DAY_OF_MONTH, lastDay);
         Date time = cal.getTime();
-        time = org.apache.commons.lang3.time.DateUtils.setHours(time, 23);
-        time = org.apache.commons.lang3.time.DateUtils.setMinutes(time, 59);
-        time = org.apache.commons.lang3.time.DateUtils.setSeconds(time, 59);
-        time = org.apache.commons.lang3.time.DateUtils.setMilliseconds(time, 0);
+        time = DateUtils.setHours(time, 23);
+        time = DateUtils.setMinutes(time, 59);
+        time = DateUtils.setSeconds(time, 59);
+        time = DateUtils.setMilliseconds(time, 0);
         return time;
     }
 
@@ -815,10 +818,10 @@ public class DateUtils {
         calendar.set(Calendar.MONTH, calendar.getActualMinimum(Calendar.MONTH));
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
         Date time = calendar.getTime();
-        time = org.apache.commons.lang3.time.DateUtils.setHours(time, 0);
-        time = org.apache.commons.lang3.time.DateUtils.setMinutes(time, 0);
-        time = org.apache.commons.lang3.time.DateUtils.setSeconds(time, 0);
-        time = org.apache.commons.lang3.time.DateUtils.setMilliseconds(time, 0);
+        time = DateUtils.setHours(time, 0);
+        time = DateUtils.setMinutes(time, 0);
+        time = DateUtils.setSeconds(time, 0);
+        time = DateUtils.setMilliseconds(time, 0);
         return time;
     }
 
@@ -840,10 +843,10 @@ public class DateUtils {
         calendar.set(Calendar.MONTH, calendar.getActualMaximum(Calendar.MONTH));
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
         Date time = calendar.getTime();
-        time = org.apache.commons.lang3.time.DateUtils.setHours(time, 23);
-        time = org.apache.commons.lang3.time.DateUtils.setMinutes(time, 59);
-        time = org.apache.commons.lang3.time.DateUtils.setSeconds(time, 59);
-        time = org.apache.commons.lang3.time.DateUtils.setMilliseconds(time, 0);
+        time = DateUtils.setHours(time, 23);
+        time = DateUtils.setMinutes(time, 59);
+        time = DateUtils.setSeconds(time, 59);
+        time = DateUtils.setMilliseconds(time, 0);
         return time;
     }
 
@@ -1158,7 +1161,7 @@ public class DateUtils {
      * 获取上周一时间
      */
     public static Date getLastWeekMonday(Date date) {
-        Date a = org.apache.commons.lang3.time.DateUtils.addDays(date, -1);
+        Date a = DateUtils.addDays(date, -1);
         Calendar cal = Calendar.getInstance();
         cal.setTime(a);
         cal.add(Calendar.WEEK_OF_YEAR, -1);// 一周
@@ -1441,6 +1444,19 @@ public class DateUtils {
         } else {
             return false;
         }
+    }
+
+    /**
+     * 传入指定日期，得到yyyy-MM-dd类型的Date
+     *
+     * @param date
+     * @return
+     * @throws ParseException
+     */
+    public static Date getCurrentDate(Date date) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String s = sdf.format(date);
+        return sdf.parse(s);
     }
 
 }

@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @author hex
  */
 @EnableAsync
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.hx.base", "mqtt"})
 @MapperScan("com.hx.base.dao.mapper")
 public class BaseApplication {
 

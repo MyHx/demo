@@ -9,15 +9,35 @@ spring:
     username: root
     password: skyworth
     driver-class-name: com.mysql.cj.jdbc.Driver
-    min-idle: 2
-    initial-size: 5
-    max-active: 10
-    max-wait: 2000
-    validation-query: select 1
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: false
     database: MYSQL
+    open-in-view: false
     hibernate:
       ddl-auto: none
     show-sql: true
+logging:
+  level:
+    org.springframework.web: info
+    com.github.binarywang.demo.wx.miniapp: debug
+    cn.binarywang.wx.miniapp: debug
+wechat:
+  miniapp:
+    configs:
+      - appid: wx1c570017b78e796d
+        secret: 35a3d3cfffd1cefdbbe7cfa94a524c41
+        token: k9NJjiv0h2ylIB24c7mW3tgM
+        aesKey: yOzC4z4kwmwigQ4Hj5TP1lEIU4wYmS0U6VlX8MANxyD
+        msgDataFormat: JSON
+infra:
+  mqtt:
+    domain: device
+    clientId: server_dev
+    qos: 1
+    #    serverURIs[0]: tcp://192.168.233.71:1883
+    serverURIs[0]: tcp://172.28.233.27:1883
+    userName: emqx_u
+    password: public
+    topics:
+      - skyAi/device/#
