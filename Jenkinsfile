@@ -17,7 +17,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // 从Git仓库检出代码
-                git branch: 'main', url: 'https://gitee.com/hexianmayun/demo.git'
+                git branch: 'master', url: 'https://gitee.com/hexianmayun/demo.git'
             }
         }
         
