@@ -2,6 +2,11 @@ pipeline {
     
     agent any
 
+    tools {
+        jdk 'JDK1.8'
+        maven 'Maven3.9.11'
+    }
+
     environment {
         // 这里主要是配置整个流水线所需要的变量，核心思想是要复用流水线和部署脚本的代码而只更改参数
         ENV = 'dev'
