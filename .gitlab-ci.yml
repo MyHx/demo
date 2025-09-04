@@ -1,0 +1,38 @@
+stages:
+  - build
+  - build-image
+  - push-image
+build:
+  stage: build
+  rules:
+    - if: '$CI_COMMIT_TAG'
+      allow_failure: false
+    - when: never
+  tags:
+    - shared
+  script:
+    - mvn clean
+    - mvn package
+  artifacts:
+    paths:
+      - target/*.jar
+build-image:
+  stage: build-image
+  tags:
+    - shared
+  rules:
+    - if: '$CI_COMMIT_TAG'
+      allow_failure: false
+    - when: never
+  script:
+    - docker build -t hx/demo:$CI_COMMIT_TAG .
+push-image:
+    stage: push-image
+    tags:
+      - shared
+    rules:
+      - if: '$CI_COMMIT_TAG'
+        allow_failure: false
+      - when: never
+    script:
+      - docker push hx/demo:$CI_COMMIT_TAG
