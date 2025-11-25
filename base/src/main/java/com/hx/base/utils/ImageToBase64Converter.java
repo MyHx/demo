@@ -26,34 +26,34 @@ public class ImageToBase64Converter {
     }
 
     public static void main(String[] args) {
-//        try {
-////            String imagePath = "C:\\Users\\lamroy\\Desktop\\创维智慧\\300002海王星辰湖滨花园店\\10.png"; // 替换为实际图片路径
-//            String imagePath = "C:\\Users\\lamroy\\Desktop\\logo.png"; // 替换为实际图片路径
-//            String base64String = convertImageToBase64(imagePath);
-//            // 如果需要Data URI格式（可直接在HTML中使用）
-//            String mimeType = Files.probeContentType(Paths.get(imagePath));
-//            String dataUri = "data:" + mimeType + ";base64," + base64String;
-//            System.out.println("Data URI:");
-//            System.out.println(dataUri);
-//        } catch (IOException e) {
-//            System.err.println("Error processing image: " + e.getMessage());
-//        }
-
-
         try {
-            for (int i = 1; i <= 6; i++) {
-                String imagePath = "C:\\Users\\lamroy\\Desktop\\创维智慧\\300005海王星辰万科云城店\\"+ i +".png"; // 替换为实际图片路径
-                String base64String = convertImageToBase64(imagePath);
-                // 如果需要Data URI格式（可直接在HTML中使用）
-                String mimeType = Files.probeContentType(Paths.get(imagePath));
-                String dataUri = "data:" + mimeType + ";base64," + base64String;
-                System.out.println(i + "图片:");
-                System.out.println(dataUri);
-                System.out.println();
-            }
+//            String imagePath = "C:\\Users\\lamroy\\Desktop\\创维智慧\\300002海王星辰湖滨花园店\\10.png"; // 替换为实际图片路径
+            String imagePath = "C:\\Users\\lamroy\\Desktop\\1.png"; // 替换为实际图片路径
+            String base64String = convertImageToBase64(imagePath);
+            // 如果需要Data URI格式（可直接在HTML中使用）
+            String mimeType = Files.probeContentType(Paths.get(imagePath));
+            String dataUri = "data:" + mimeType + ";base64," + base64String;
+            System.out.println("Data URI:");
+            System.out.println(dataUri);
         } catch (IOException e) {
             System.err.println("Error processing image: " + e.getMessage());
         }
+
+
+//        try {
+//            for (int i = 1; i <= 6; i++) {
+//                String imagePath = "C:\\Users\\lamroy\\Desktop\\创维智慧\\300005海王星辰万科云城店\\"+ i +".png"; // 替换为实际图片路径
+//                String base64String = convertImageToBase64(imagePath);
+//                // 如果需要Data URI格式（可直接在HTML中使用）
+//                String mimeType = Files.probeContentType(Paths.get(imagePath));
+//                String dataUri = "data:" + mimeType + ";base64," + base64String;
+//                System.out.println(i + "图片:");
+//                System.out.println(dataUri);
+//                System.out.println();
+//            }
+//        } catch (IOException e) {
+//            System.err.println("Error processing image: " + e.getMessage());
+//        }
 
     }
 }
